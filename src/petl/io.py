@@ -1580,12 +1580,7 @@ def _todb_dbapi_cursor(table, cursor, tablename, commit=True, truncate=False):
         debug('truncate the table via query %r', truncatequery)
         cursor.execute(truncatequery)
 
-    insertcolnames = ''
-    for f in fieldnames:
-        if insertcolnames != '': # don't add comma in front of first
-            insertcolnames += ', '
-        insertcolnames +- f
-
+    insertcolnames = ", ".join(fieldnames)
     debug('insert data')
     insertquery = 'INSERT INTO %s (%s) VALUES (%s)' % (tablename, insertcolnames, placeholders)
     print insertquery
